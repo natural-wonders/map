@@ -1,0 +1,33 @@
+stages:
+  - test
+  - deploy
+
+workflow:
+  rules:
+    - if: >
+        ($CI_COMMIT_REF_NAME == "main"
+        || $CI_COMMIT_REF_NAME == "gh-pages")
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+
+run-tests:
+  stage: test
+  image: node:18
+  before_script:
+    - npm install -G pnpm
+    - pnpm install
+  script:
+    - npm run test
+
+deploy-site:
+  stage: deploy
+  image: python:3.10
+  before_script:
+    - npm install -G pnpm
+    - pnpm install
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - public
