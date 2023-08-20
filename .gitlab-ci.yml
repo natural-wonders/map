@@ -45,7 +45,7 @@ pages:
     - npm run build
     # Cloudflare Pages deploy
     - >
-      wrangler pages publish ./public
+      wrangler pages deploy ./public
       --project-name=natural-wonders --branch=main
   # Gitlab Pages deploy
   artifacts:
