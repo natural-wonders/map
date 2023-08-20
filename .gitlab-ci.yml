@@ -34,4 +34,4 @@ deploy-site:
     - npm run build
   artifacts:
     paths:
-      - build
+      - public
