@@ -40,5 +40,8 @@
 		"vite": "^4.4.9",
 		"vitest": "^0.34.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"sqlocal": "^0.5.2"
+	}
 }

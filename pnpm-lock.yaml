@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  sqlocal:
+    specifier: ^0.5.2
+    version: 0.5.2
+
 devDependencies:
   '@playwright/test':
     specifier: ^1.37.1
@@ -443,6 +448,13 @@ packages:
     dependencies:
       tailwindcss: 3.3.3
     dev: true
+
+  /@sqlite.org/sqlite-wasm@3.42.0-build2:
+    resolution: {integrity: sha512-CCav4keRFcENRYUkJtCQmOqBQ6BI5ZMo5lcRa7nFkfJVZRIewVWlb327+Re3kuL7oC+Qfc84gC9RqHzLHYt0EQ==}
+    hasBin: true
+    dependencies:
+      comlink: 4.4.1
+    dev: false
 
   /@sveltejs/adapter-static@2.0.3(@sveltejs/kit@1.22.6):
     resolution: {integrity: sha512-VUqTfXsxYGugCpMqQv1U0LIdbR3S5nBkMMDmpjGVJyM6Q2jHVMFtdWJCkeHMySc6mZxJ+0eZK3T7IgmUCDrcUQ==}
@@ -944,6 +956,11 @@ packages:
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: true
+
+  /comlink@4.4.1:
+    resolution: {integrity: sha512-+1dlx0aY5Jo1vHy/tSsIGpSkN4tS9rZSW8FIhG0JH/crs9wwweswIo/POr451r7bZww3hFbPAKnTpimzL/mm4Q==}
+    requiresBuild: true
+    dev: false
 
   /commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
@@ -1507,6 +1524,11 @@ packages:
     resolution: {integrity: sha512-9pSL5XB4J+ifHP0e0jmmC98OGC1nL8/JjS+fi6mnTlIf//yt/MfVLtKg7S6nCtj/8KTcWX7nRlY0XywoYY1ISQ==}
     dev: true
 
+  /kysely@0.26.1:
+    resolution: {integrity: sha512-FVRomkdZofBu3O8SiwAOXrwbhPZZr8mBN5ZeUWyprH29jzvy6Inzqbd0IMmGxpd4rcOCL9HyyBNWBa8FBqDAdg==}
+    engines: {node: '>=14.0.0'}
+    dev: false
+
   /levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
@@ -1652,6 +1674,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
+
+  /nanoid@4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -2080,6 +2108,14 @@ packages:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /sqlocal@0.5.2:
+    resolution: {integrity: sha512-QaPj2LxCvdukr6lk9Ds/d4ISX3Av1kWPepFcgMXDkaLaNSOUR1vnjltDJCgvPd5Zedi2p3+u9WtK1TOBHnpfPg==}
+    dependencies:
+      '@sqlite.org/sqlite-wasm': 3.42.0-build2
+      kysely: 0.26.1
+      nanoid: 4.0.2
+    dev: false
 
   /stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
