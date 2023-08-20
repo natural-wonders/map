@@ -11,6 +11,12 @@ workflow:
     - if: '$CI_PIPELINE_SOURCE == "web"'
       when: always
 
+cache:
+  paths:
+    - node_modules/
+    - .cache/
+    - public/
+
 # run-tests:
 #   stage: test
 #   image: node:18
