@@ -1,3 +1,4 @@
+---
 repos:
   # Versioning: Commit Messages & Changelog
   - repo: https://github.com/commitizen-tools/commitizen
@@ -18,6 +19,11 @@ repos:
     rev: v1.32.0
     hooks:
       - id: yamllint
+        args:
+          [
+            '-d {extends: relaxed, rules: {line-length: disable, document-start: disable}, ignore: chart}',
+            '-s'
+          ]
         files: \.(yaml|yml)$
 
   # Lint: Javascript
