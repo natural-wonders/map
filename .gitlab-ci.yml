@@ -14,6 +14,7 @@ workflow:
 cache:
   paths:
     - node_modules/
+    - .pnpm-store/
     - .cache/
     - public/
 
@@ -31,13 +32,22 @@ cache:
 pages:
   stage: deploy
   image: node:18
+  variables:
+    CLOUDFLARE_ACCOUNT_ID: $CLOUDFLARE_ACCOUNT_ID
+    CLOUDFLARE_API_TOKEN: $CLOUDFLARE_API_TOKEN
   before_script:
     - corepack enable
     - corepack prepare pnpm@latest-8 --activate
     - pnpm config set store-dir .pnpm-store
+    - npm install --global wrangler
   script:
     - pnpm install
     - npm run build
+    # Cloudflare Pages deploy
+    - >
+      wrangler pages publish ./public
+      --project-name=natural-wonders --branch=main
+  # Gitlab Pages deploy
   artifacts:
     paths:
       - public
