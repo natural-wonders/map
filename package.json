@@ -1,5 +1,6 @@
 {
 	"name": "natural-wonders-map",
+	"description": "A map displaying the natural wonders of the world.",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {

@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<div class="card p-4">
+	<ul>
+		{#each ['1', '2', '3'] as pos, index}
+			<li>
+				<div class="placeholder-circle w-16" />
+			</li>
+		{/each}
+	</ul>
+</div>
