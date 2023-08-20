@@ -1,4 +1,3 @@
----
 repos:
   # Versioning: Commit Messages & Changelog
   - repo: https://github.com/commitizen-tools/commitizen
