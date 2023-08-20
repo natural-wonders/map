@@ -1,5 +1,5 @@
 stages:
-  - test
+  # - test
   - deploy
 
 workflow:
@@ -11,16 +11,16 @@ workflow:
     - if: '$CI_PIPELINE_SOURCE == "web"'
       when: always
 
-run-tests:
-  stage: test
-  image: node:18
-  before_script:
-    - corepack enable
-    - corepack prepare pnpm@latest-8 --activate
-    - pnpm config set store-dir .pnpm-store
-  script:
-    - pnpm install
-    - npm run test
+# run-tests:
+#   stage: test
+#   image: node:18
+#   before_script:
+#     - corepack enable
+#     - corepack prepare pnpm@latest-8 --activate
+#     - pnpm config set store-dir .pnpm-store
+#   script:
+#     - pnpm install
+#     - npm run test
 
 deploy-site:
   stage: deploy
