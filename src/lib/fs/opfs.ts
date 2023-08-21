@@ -1,4 +1,5 @@
-export async function opfsFileExists(opfsRoot: FileSystemDirectoryHandle, fileName: string) {
+export async function opfsFileExists(fileName: string) {
+	const opfsRoot = await navigator.storage.getDirectory();
 	try {
 		await opfsRoot.getFileHandle(fileName);
 	} catch {
@@ -10,13 +11,14 @@ export async function opfsFileExists(opfsRoot: FileSystemDirectoryHandle, fileNa
 	return true;
 }
 
-export async function writeBinaryToOPFS(
-	opfsRoot: FileSystemDirectoryHandle,
-	fileName: string,
-	data: ArrayBuffer
-) {
+export async function writeBinaryToOPFS(fileName: string, data: ArrayBuffer) {
+	const opfsRoot = await navigator.storage.getDirectory();
 	const fileHandle = await opfsRoot.getFileHandle(fileName, { create: true });
 	const writable = await fileHandle.createWritable();
 	await writable.write(data);
 	await writable.close();
+	console.log(`Data written to OPFS file: ${fileName}`);
 }
+
+// To delete
+// await opfsRoot.removeEntry(dbName, {recursive: true});

@@ -1,4 +1,4 @@
-export async function downloadFile(fileUrl: string): Promise<ArrayBuffer> {
+export async function downloadFile(fileUrl: string): Promise<ArrayBuffer | null> {
 	try {
 		const response = await fetch(fileUrl);
 		if (!response.ok) {
@@ -8,7 +8,6 @@ export async function downloadFile(fileUrl: string): Promise<ArrayBuffer> {
 		return arrayBuffer;
 	} catch (error) {
 		console.error(error);
-		console.error('Error downloading file: ', fileUrl);
-		throw error;
+		return null;
 	}
 }
