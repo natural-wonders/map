@@ -20,8 +20,12 @@ jobs:
 
       - name: Create Branch
         run: |
+          git config --global user.email "naturalwondersapp@gmail.com"
+          git config --global user.name "nwm-bot"
+
           git checkout -b feat/${{ github.event.inputs.name}}
           echo "${{ github.event.inputs.sql }}" >> static/changes.sql
+
           git add static/changes.sql
           git commit -m "feat: add wonder ${{ github.event.inputs.name}}"
           git push origin feat/${{ github.event.inputs.name }}
