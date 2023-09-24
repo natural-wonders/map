@@ -45,11 +45,11 @@ jobs:
           response=$(curl -X POST \
             -H "Authorization: Bearer ${PAT}" \
             -H "Accept: application/vnd.github+json" \
-            -d '{
-              "title": "New Wonder: ${{ github.event.inputs.name }}",
-              "base": "main",
-              "head": "feat/${{ github.event.inputs.name }}-${{ github.run.id }}",
-              "body": "${{ github.event.inputs.sql }}",
-            }' \
+            -d "{
+              \"title\": \"New Wonder: ${{ github.event.inputs.name }}\",
+              \"base\": \"main\",
+              \"head\": \"feat/${{ github.event.inputs.name }}-${{ github.run.id }}\",
+              \"body\": \"${{ github.event.inputs.sql }}\"
+            }" \
             https://api.github.com/repos/${{ github.repository }}/pulls)
           echo "Response for Github API: $response"
