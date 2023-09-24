@@ -1,0 +1,20 @@
+name: Trigger PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      sql:
+        description: 'The SQL INSERT statement to include in the PR'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run some actions
+        run: |
+          echo "${{ github.event.inputs.sql }}"
