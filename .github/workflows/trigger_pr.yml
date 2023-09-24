@@ -15,7 +15,6 @@ permissions:
 
 env:
   PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SUFFIX: $(shuf -i 100-999 -n 1)
 
 jobs:
   trigger_pr:
@@ -27,6 +26,8 @@ jobs:
 
       - name: Create Branch
         run: |
+          echo SUFFIX=$(shuf -i 100-999 -n 1) >> $GITHUB_ENV
+
           git config --global user.email "naturalwondersapp@gmail.com"
           git config --global user.name "nwm-bot"
 
