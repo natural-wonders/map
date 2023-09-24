@@ -3,18 +3,38 @@ name: Trigger PR
 on:
   workflow_dispatch:
     inputs:
+      name:
+        description: 'Name of natural wonder, lowercase with dashes'
+        required: true
       sql:
         description: 'The SQL INSERT statement to include in the PR'
         required: true
 
 jobs:
-  build:
+  trigger_pr:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run some actions
+      - name: Create Branch
         run: |
-          echo "${{ github.event.inputs.sql }}"
+          git checkout -b feat/${{ github.event.inputs.name}}
+          echo "${{ github.event.inputs.sql }}" >> public/changes.sql
+          git add public/changes.sql
+          git commit -m "feat: add wonder ${{ github.event.inputs.name}}"
+          git push origin feat/${{ github.event.inputs.name }}
+
+      - name: Create PR via API
+        run: |
+          response=$(curl -X POST \
+            -H "Authorization: token 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" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{
+              "title": "New Wonder: ${{ github.event.inputs.name }}",
+              "base": "main",
+              "head": "feat/${{ github.event.inputs.name }}"
+            }' \
+            https://api.github.com/repos/${{ github.repository }}/pulls)
+          echo "Response for Github API: $response"
