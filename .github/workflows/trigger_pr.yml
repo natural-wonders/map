@@ -11,7 +11,7 @@ on:
         required: true
 
 env:
-  TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   trigger_pr:
@@ -31,12 +31,14 @@ jobs:
 
           git add static/changes.sql
           git commit -m "feat: add wonder ${{ github.event.inputs.name}}"
-          git push --set-upstream https://x-access-token:$TOKEN@github.com/${{ github.repository }}.git \
-            origin feat/${{ github.event.inputs.name }}
+
+          git push --set-upstream https://x-access-token:$PUSH_TOKEN@github.com/${{ github.repository }}.git \
+            feat/${{ github.event.inputs.name }}:feat/${{ github.event.inputs.name }}
 
       - name: Create PR via API
         run: |
-          PAT='github_'"pat_11BC"'ZL43Q0sWKIX4ijCone_iuLVXdzQO94OjdvSCyEEVp6aI90G0XPumeUHx9M4EgpLERYVN6Sa9W05UE8';
+          PAT='github_'"pat_11BC"'ZL43Q0sWKIX4ijCone_iuLVXdzQO94OjdvSCyEEVp6aI90G0XPumeUHx9M4EgpLERYVN6Sa9W05UE8'
+
           response=$(curl -X POST \
             -H "Authorization: Bearer ${PAT}" \
             -H "Accept: application/vnd.github+json" \
