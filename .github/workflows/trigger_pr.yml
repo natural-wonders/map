@@ -29,14 +29,14 @@ jobs:
           git config --global user.email "naturalwondersapp@gmail.com"
           git config --global user.name "nwm-bot"
 
-          git checkout -b feat/${{ github.event.inputs.name}}-${{ github.run.id }}
+          git checkout -b feat/${{ github.event.inputs.name}}-${{ github.run_id }}
           echo "${{ github.event.inputs.sql }}" >> static/changes.sql
 
           git add static/changes.sql
           git commit -m "feat: add wonder ${{ github.event.inputs.name}}"
 
           git push --set-upstream https://x-access-token:$PUSH_TOKEN@github.com/${{ github.repository }}.git \
-            feat/${{ github.event.inputs.name }}-${{ github.run.id }}:feat/${{ github.event.inputs.name }}-${{ github.run.id }}
+            feat/${{ github.event.inputs.name }}-${{ github.run_id }}:feat/${{ github.event.inputs.name }}-${{ github.run_id }}
 
       - name: Create PR via API
         run: |
@@ -48,7 +48,7 @@ jobs:
             -d "{
               \"title\": \"New Wonder: ${{ github.event.inputs.name }}\",
               \"base\": \"main\",
-              \"head\": \"feat/${{ github.event.inputs.name }}-${{ github.run.id }}\",
+              \"head\": \"feat/${{ github.event.inputs.name }}-${{ github.run_id }}\",
               \"body\": \"${{ github.event.inputs.sql }}\"
             }" \
             https://api.github.com/repos/${{ github.repository }}/pulls)
