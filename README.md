@@ -16,13 +16,26 @@ View the world's natural wonders on a map.
 - Contributions to the data quality are welcomed.
 - Submissions can be made via the app, then should be bundled in the next release.
 
-## Flow
+## Adding New Wonders in Gitlab (via the app)
 
 1. Github service account with committed personal access token
-   (scoped to create issues only).
-2. Call Github API via app, generating issues containing an SQL
-   dump of the data a user added.
-3. Issues are in a standardised format, triggering a PR via Github
-   workflow to append the SQL to a `changes.txt` document.
-4. Approved PRs merge in the SQL into `changes.txt`.
-5. The changes file is executed on the SQLite DB monthly, and changes file wiped.
+   (scoped with actions:write only).
+2. Call Github API via app, triggering workflow_dispatch webhook, and including SQL
+   INSERT statement (with user data) as an input.
+3. A Github workflow runs to create a PR, adding the SQL INSERT statement to changes.sql.
+4. Once reviewed, merging the PR triggers another Github workflow,
+   that actually runs the SQL statement
+   on the SQLite file, and pushes the updated file back to the repo.
+
+## Offline First Database
+
+- On first load the user downloads the SQLite file from the repo (if it doesn't exist).
+- The database is persisted in OPFS in the browser.
+- When the user creates a new wonder,
+  it is appended to a `changes.sqlite3` file, also in OPFS.
+  This allows the user to see their edit, despite it not being merged yet.
+- There is a 'refresh' button in the app.
+  When the user clicks this, the main SQLite DB is re-downloaded.
+  The `changes.sqlite3` and the main DB are compared, and if the wonder is now included
+  in the main DB (i.e. it was merged in Gitlab),
+  then the record is deleted from `changes.sqlite3`.
