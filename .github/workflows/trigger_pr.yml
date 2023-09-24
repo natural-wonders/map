@@ -10,6 +10,9 @@ on:
         description: 'The SQL INSERT statement to include in the PR'
         required: true
 
+env:
+  TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   trigger_pr:
     runs-on: ubuntu-latest
@@ -28,7 +31,8 @@ jobs:
 
           git add static/changes.sql
           git commit -m "feat: add wonder ${{ github.event.inputs.name}}"
-          git push origin feat/${{ github.event.inputs.name }}
+          git push --set-upstream https://x-access-token:$TOKEN@github.com/${{ github.repository }}.git \
+            origin feat/${{ github.event.inputs.name }}
 
       - name: Create PR via API
         run: |
