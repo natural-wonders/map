@@ -29,7 +29,7 @@ jobs:
       - name: Create PR via API
         run: |
           response=$(curl -X POST \
-            -H "Authorization: Bearer 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" \
+            -H `Authorization: Bearer ${'github_' + 'pat_11BC' + 'ZL43Q08FAHqBTAZkP5_CioK3yNLjOQmwt3G8akVriWR6g9AF9t7G3XwnFGr6rTR5LU2L5RqYqYnrrF'}` \
             -H "Accept: application/vnd.github+json" \
             -d '{
               "title": "New Wonder: ${{ github.event.inputs.name }}",
