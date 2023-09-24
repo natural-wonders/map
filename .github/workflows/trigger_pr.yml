@@ -21,14 +21,14 @@ jobs:
       - name: Create Branch
         run: |
           git checkout -b feat/${{ github.event.inputs.name}}
-          echo "${{ github.event.inputs.sql }}" >> public/changes.sql
-          git add public/changes.sql
+          echo "${{ github.event.inputs.sql }}" >> static/changes.sql
+          git add static/changes.sql
           git commit -m "feat: add wonder ${{ github.event.inputs.name}}"
           git push origin feat/${{ github.event.inputs.name }}
 
       - name: Create PR via API
         run: |
-          PAT='github_'"pat_11BC"'ZL43Q08FAHqBTAZkP5_CioK3yNLjOQmwt3G8akVriWR6g9AF9t7G3XwnFGr6rTR5LU2L5RqYqYnrrF'
+          PAT='github_'"pat_11BC"'ZL43Q0sWKIX4ijCone_iuLVXdzQO94OjdvSCyEEVp6aI90G0XPumeUHx9M4EgpLERYVN6Sa9W05UE8';
           response=$(curl -X POST \
             -H "Authorization: Bearer ${PAT}" \
             -H "Accept: application/vnd.github+json" \
