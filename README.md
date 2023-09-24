@@ -19,7 +19,7 @@ View the world's natural wonders on a map.
 ## Adding New Wonders in Gitlab (via the app)
 
 1. Github service account with committed personal access token
-   (scoped with actions:write only).
+   (scoped with actions:write pull_request:write only).
 2. Call Github API via app, triggering workflow_dispatch webhook, and including SQL
    INSERT statement (with user data) as an input.
 3. A Github workflow runs to create a PR, adding the SQL INSERT statement to changes.sql.
