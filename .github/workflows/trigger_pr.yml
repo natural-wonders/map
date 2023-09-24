@@ -10,6 +10,9 @@ on:
         description: 'The SQL INSERT statement to include in the PR'
         required: true
 
+permissions:
+  contents: write
+
 env:
   PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
